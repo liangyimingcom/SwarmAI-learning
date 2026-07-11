@@ -113,6 +113,8 @@ paused `goal-loop-*` cron (resume + point at a real goal).
 | [`docs/walkthrough-run-list.md`](docs/walkthrough-run-list.md) | Full replay of one real run (adding the `run-list` command) — every stage + all 3 gates, with mermaid flow + sequence diagrams. Includes a live Gate 2 catch (a builder blind spot escalated to HIGH). |
 | [`docs/pipeline-on-surf-forecast.md`](docs/pipeline-on-surf-forecast.md) | How to apply the pipeline to the MeshClaw **surf-forecast** project: red-lines→gates mapping, CodeLens blast-radius commands, principle analysis (记性 vs 结构). |
 | [`docs/eval-os.md`](docs/eval-os.md) | Eval OS (engine #13) port: proprioception via Golden Set + programmatic/LLM-judge/simulation evaluators + git-bound regression gate + trend. Includes the "测不到=没造" mutation demo. |
+| [`docs/ddd-engine.md`](docs/ddd-engine.md) | DDD knowledge engine (engine #3) port: 4-doc interface + 7-class ontology + Ebbinghaus/Hebbian Darwinian decay + stage injection + REFLECT write-back. |
+| [`docs/eval-on-surf-forecast.md`](docs/eval-on-surf-forecast.md) · [`docs/ddd-on-surf-forecast.md`](docs/ddd-on-surf-forecast.md) | Applying Eval OS / DDD to the MeshClaw **surf-forecast** project (red-lines → regression gate / typed ontology). |
 | [`.kiro/skills/autonomous-pipeline/INSTRUCTIONS.md`](.kiro/skills/autonomous-pipeline/INSTRUCTIONS.md) | The orchestrator runbook: exact command sequence + gate/sub-agent/CodeLens/goal wiring. |
 
 ## Status & known gaps

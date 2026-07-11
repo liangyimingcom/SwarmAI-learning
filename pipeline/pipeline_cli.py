@@ -502,6 +502,34 @@ def cmd_run_observe(args) -> None:
     _ok({"observed": args.event, "count": len(run["observations"])})
 
 
+def _ddd_writeback(run_id: str, lessons: list, rp_new: list) -> list:
+    """REFLECT -> DDD: turn lessons into typed ontology entries via ddd.py (subprocess).
+    what_worked -> guideline · what_failed -> pitfall · rp_new -> constraint."""
+    import subprocess
+    ddd = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ddd.py")
+    if not os.path.exists(ddd):
+        return []
+    jobs = []
+    for L in lessons:
+        if L.get("what_worked"):
+            jobs.append(("guideline", L["what_worked"]))
+        if L.get("what_failed"):
+            jobs.append(("pitfall", L["what_failed"]))
+    for r in rp_new:
+        jobs.append(("constraint", r))
+    added = []
+    for t, text in jobs:
+        try:
+            out = subprocess.run([sys.executable, ddd, "add", "--type", t,
+                                  "--text", text, "--source", run_id],
+                                 capture_output=True, text=True, timeout=30)
+            if out.returncode == 0:
+                added.append({"type": t, "id": json.loads(out.stdout).get("added")})
+        except Exception:
+            pass
+    return added
+
+
 def cmd_run_cultivate(args) -> None:
     """REFLECT write-back: fold this run's lessons into project meta-intelligence +
     append additive lessons to the steering lessons file. This is the compounding loop:
@@ -588,6 +616,10 @@ def cmd_run_cultivate(args) -> None:
             for c in learn_candidates:
                 f.write(json.dumps({**c, "run_id": run["run_id"], "at": _now()}, ensure_ascii=False) + "\n")
 
+    # 6c. write lessons back into the DDD knowledge engine as typed ontology entries
+    #     (what_worked -> guideline, what_failed -> pitfall, rp_new -> constraint)
+    ddd_added = _ddd_writeback(run["run_id"], lessons, rp_new)
+
     _ok({
         "cultivated": run["run_id"], "outcome": outcome,
         "runs_total": intel["runs_total"],
@@ -601,6 +633,7 @@ def cmd_run_cultivate(args) -> None:
             if learn_candidates else None
         ),
         "learn_candidates": learn_candidates,
+        "ddd_added": ddd_added,
     })
 
 
