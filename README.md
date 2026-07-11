@@ -114,6 +114,9 @@ paused `goal-loop-*` cron (resume + point at a real goal).
 | [`docs/pipeline-on-surf-forecast.md`](docs/pipeline-on-surf-forecast.md) | How to apply the pipeline to the MeshClaw **surf-forecast** project: red-lines→gates mapping, CodeLens blast-radius commands, principle analysis (记性 vs 结构). |
 | [`docs/eval-os.md`](docs/eval-os.md) | Eval OS (engine #13) port: proprioception via Golden Set + programmatic/LLM-judge/simulation evaluators + git-bound regression gate + trend. Includes the "测不到=没造" mutation demo. |
 | [`docs/ddd-engine.md`](docs/ddd-engine.md) | DDD knowledge engine (engine #3) port: 4-doc interface + 7-class ontology + Ebbinghaus/Hebbian Darwinian decay + stage injection + REFLECT write-back. |
+| [`docs/self-evolution.md`](docs/self-evolution.md) | Self-evolution (engine #6) port: corrections MINE→ASSESS→ACT→AUDIT, L0→L3 ladder, recurring class → code-enforced structural gate. |
+| [`docs/pollinate-engine.md`](docs/pollinate-engine.md) | Pollinate content engine (engine #5) port: one message → 11 tracks + 5-gate brand conformance, shares the DDD layer with the pipeline. |
+| [`docs/memory-task-mapping.md`](docs/memory-task-mapping.md) · [`docs/platform-base-mapping.md`](docs/platform-base-mapping.md) | Engines #2/#10 and the 6 platform-base engines (#1/#7/#8/#9/#11/#12) mapped to MeshClaw natives — all 13 engines accounted for. |
 | [`docs/eval-on-surf-forecast.md`](docs/eval-on-surf-forecast.md) · [`docs/ddd-on-surf-forecast.md`](docs/ddd-on-surf-forecast.md) | Applying Eval OS / DDD to the MeshClaw **surf-forecast** project (red-lines → regression gate / typed ontology). |
 | [`.kiro/skills/autonomous-pipeline/INSTRUCTIONS.md`](.kiro/skills/autonomous-pipeline/INSTRUCTIONS.md) | The orchestrator runbook: exact command sequence + gate/sub-agent/CodeLens/goal wiring. |
 
