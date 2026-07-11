@@ -1,13 +1,33 @@
-# Autonomous Pipeline — MeshClaw Port
+# SwarmAI → MeshClaw Port (13 engines)
 
-A faithful port of [SwarmAI](https://github.com/xg-gh-25/SwarmAI)'s **Autonomous Pipeline**
-(Phase 3: "Coding as Black Box") onto the **MeshClaw** agent runtime.
+A learning port of [SwarmAI](https://github.com/xg-gh-25/SwarmAI)'s **self-evolving Agent OS**
+onto the **MeshClaw** agent runtime. Started as the **Autonomous Pipeline** (engine #4) and
+grew to cover all **13 engines**: 5 built & verified end-to-end, 7 mapped to MeshClaw natives,
+1 N/A.
 
 > One-sentence requirement in → PR-ready, adversarially-reviewed code out.
 > **9 stages · 3 gates · 2 modes**, with a DDD knowledge loop that compounds every run.
 >
 > The thesis: **gates are structural, not behavioral.** A confident model cannot
 > rationalize past a gate enforced in code. Carefulness doesn't scale; gates do.
+
+## 13-engine status (all accounted for)
+
+| # | Engine | Status | Where |
+|---|--------|--------|-------|
+| 4 | Autonomous Pipeline | ✅ built + verified | `pipeline/pipeline_cli.py` + skill ([doc](docs/walkthrough-run-list.md)) |
+| 13 | Eval OS | ✅ built + verified | `pipeline/eval_os.py` ([doc](docs/eval-os.md)) |
+| 3 | DDD knowledge engine | ✅ built + verified | `pipeline/ddd.py` ([doc](docs/ddd-engine.md)) |
+| 6 | Self-Evolution | ✅ built + verified | `pipeline/self_evolution.py` ([doc](docs/self-evolution.md)) |
+| 5 | Pollinate content engine | ✅ built + verified | `pipeline/pollinate.py` ([doc](docs/pollinate-engine.md)) |
+| 2 | Memory pipeline | ✅ mapped to native | [doc](docs/memory-task-mapping.md) |
+| 10 | Task system | ✅ mapped to native | [doc](docs/memory-task-mapping.md) |
+| 1 · 7 · 8 · 9 · 12 | Context · Self-heal · Multi-tab · Hooks · Skills+Channels | ✅ mapped to native | [doc](docs/platform-base-mapping.md) |
+| 11 | 4-platform backend | ⬜ N/A (MeshClaw *is* the runtime) | — |
+
+**Compounding loop (closed & runnable):** Memory → Pipeline judgment (#4) → DDD (#3) →
+Evolution (#6) → gates → Memory, with Eval (#13) proving convergence and Pollinate (#5)
+applying the same DDD layer to content. Verified end-to-end (see `.artifacts/runs/`, PRs #1–#4).
 
 ## Architecture
 
