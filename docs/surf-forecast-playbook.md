@@ -150,3 +150,76 @@ flowchart LR
 3. 合并前跑 `eval_os.py --golden eval/redlines.jsonl --gate`；上线后 `pollinate.py` 产公告。
 
 > 参考:`docs/pipeline-on-surf-forecast.md` · `docs/eval-on-surf-forecast.md` · `docs/ddd-on-surf-forecast.md` · `docs/LEARNINGS.md`。
+
+---
+
+## 6. 具体示例（照抄即可，带预期输出）
+
+### Sample A — 最省事：对 agent 说一句话
+在 surf-forecast 目录的 MeshClaw 会话里，你只打一句：
+```
+run pipeline for 给 /api/forecast 的预报 JSON 增加 gustRatio 阵风比字段
+```
+接下来 agent（我）会自动这样跑，你只在门口"拍板"：
+```
+① EVALUATE  → 读 DDD, 注入 4 红线 + wdeg 契约
+            → spawn Gate0 skeptic: "gustRatio 现在真不存在吗?" → SUPPORTED ✅
+② THINK     → 2 备选(加字段 vs 改scoring), 选加字段
+③ PLAN      → CodeLens get_impact score_wind(上游31) + Gate1 SSA → SOUND ✅
+④ BUILD     → TDD 写 gustRatio 计算 + 测试(含 float→Decimal 写库)
+⑤⑥ REVIEW/TEST → 3层验证 + 118 pytest 基线无回归
+⑦ DELIVER   → spawn Gate2 对抗: operational 查 _to_decimal ✅ / api-contract 查 wdeg 数字 ✅
+            → push-ready
+⑨ REFLECT   → 教训写回 DDD, learn_add
+```
+**你要做的只有**:在 Gate 0/1/2 三处看一眼裁决、DELIVER 时确认 push。其余结构替你把关。
+
+### Sample B — 手动跑一遍（看得见每道门）
+```bash
+SF=/Users/yiming/Downloads/all_the_meshclaw/surf-forecast/surf-forecast-kiro-v2
+export DDD_STORE="$SF/ddd/knowledge.jsonl" PIPELINE_ARTIFACTS_ROOT="$SF/.pipeline-artifacts"
+cd "$SF"; PIPE="python3 pipeline/pipeline_cli.py"
+
+# 1) 建 run(自动浮现 intel 注入建议)
+$PIPE run-create --project surf-forecast --requirement "预报JSON加gustRatio字段" --profile full
+# 输出: {"run_id":"run_xxxx","intel":{...},"evaluate_must_consider":"..."}
+
+# 2) 先看 DDD 该阶段注入什么红线
+python3 pipeline/ddd.py inject --stage evaluate
+# 输出: 4 条 constraint(float→Decimal/ALB SG/api401/terraform) + 1 model(wdeg) + 1 decision
+
+# 3) publish evaluate —— 若 understanding.claim 写成"我要加字段"(解决方案语言)会被 Gate0 拦:
+$PIPE publish --run-id run_xxxx --stage evaluate --data '{"recommendation":"GO",...,"understanding":{"claim":"我要加 gustRatio",...}}'
+# 输出(stderr): BLOCK: Understanding gate M1: claim contains solution language  ← 门在挡你
+# 改成描述现状即可过:  "claim":"当前预报JSON无 gustRatio 字段"
+```
+
+### Sample C — 合并前守红线（Eval 回归门）
+```bash
+# 建 surf 的红线 golden set(一次性, 每条一个 shell 检查):
+cat > "$SF/eval/redlines.jsonl" <<'JSONL'
+{"id":"RL_spots401","check":"curl -s -o /dev/null -w '%{http_code}' localhost:8000/api/spots | grep -q 401","expect":"PASS"}
+{"id":"RL_no_open_sg","check":"! grep -rn '0.0.0.0/0' infra/ terraform/ 2>/dev/null","expect":"PASS"}
+{"id":"RL_decimal","check":"python3 -c \"import subprocess,sys; sys.exit(0 if '_to_decimal' in open('src/web/db.py').read() else 1)\"","expect":"PASS"}
+JSONL
+# 合并前跑(破任一红线 → exit3 拦住):
+python3 pipeline/eval_os.py --golden "$SF/eval/redlines.jsonl" --gate
+# 全绿 → exit 0 可合并; 某条红线破了 → "EVAL GATE: BLOCK" + exit3
+```
+
+### Sample D — 上线后产公告（Pollinate 5 门）
+```bash
+P="python3 pipeline/pollinate.py"
+$P plan --message "浪报新增阵风比 gustRatio" --channel social --complexity low
+# 输出: {"selected_tracks":["poster","shorts"]}
+
+# ❌ 自吹稿 —— 被拦:
+$P gate --message "gustRatio上线" --format poster --draft "我们激动地宣布业界领先的阵风比，最强算法从不出错"
+# 输出(stderr): POLLINATE GATE: BLOCK — 2 failures [1_voice, 3_accuracy]
+
+# ✅ 受众导向稿 —— 通过并记录:
+$P gate --message "gustRatio上线" --format poster --draft "阵风忽大忽小毁了你的浪? 现在浪报直接告诉你的常冲浪点阵风比，出门前扫一眼。" --record
+# 输出: {"push_ready": true}
+```
+
+> **对照记**:Sample A 是"日常用法"（说一句话）;B/C/D 是"想看清内部机制"时手动跑。红线只在 DDD 写一次（`$SF/ddd/knowledge.jsonl`），Pipeline/Eval/Pollinate 三处都读它。
