@@ -1,2 +1,3 @@
 {"rule": "首版 slugify 无长度上限——归为可复用 RP：纯函数产出无界字符串须设 cap", "negative": "", "category": "knowledge", "scope": "workspace", "run_id": "run_6469c1bb", "at": "2026-07-11T11:58:33.568206+00:00"}
 {"rule": "分级/阈值判定的测试必须双侧钉死边界(N与N-1)并做mutation验证(revert比较符即变红)，否则off-by-one突变存活;防御性clamp若不可达勿命名为测clamp", "negative": "", "category": "knowledge", "scope": "workspace", "run_id": "run_28c9f294", "at": "2026-07-11T12:26:03.369652+00:00"}
+{"rule": "遍历聚合多文件的命令(list/汇总)必须逐条 try/except 隔离坏/半写/非dict文件, 一个坏文件不能拖垮整体; 尤其写入非原子时并发读会命中半写文件", "negative": "", "category": "knowledge", "scope": "workspace", "run_id": "run_1406019f", "at": "2026-07-11T13:02:58.117589+00:00"}

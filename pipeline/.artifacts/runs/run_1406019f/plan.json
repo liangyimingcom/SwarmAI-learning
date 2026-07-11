@@ -1,0 +1,48 @@
+{
+  "stage": "plan",
+  "published_at": "2026-07-11T13:00:03.927401+00:00",
+  "data": {
+    "approach": "cmd_run_list 扫描 ARTIFACTS_ROOT/runs/*/run.json 汇总, --status 过滤; 加 subparser",
+    "file_discovery": [
+      {
+        "path": "pipeline/pipeline_cli.py",
+        "action": "MODIFY"
+      },
+      {
+        "path": "pipeline/test_run_list.py",
+        "action": "TEST"
+      }
+    ],
+    "change_spec": [
+      {
+        "id": "c1",
+        "desc": "cmd_run_list+subparser",
+        "depends_on": [],
+        "ac": "AC1-3",
+        "verify": "run-list"
+      },
+      {
+        "id": "c2",
+        "desc": "3AC subprocess测试",
+        "depends_on": [
+          "c1"
+        ],
+        "ac": "AC1-3",
+        "verify": "run tests"
+      }
+    ],
+    "success_criteria": [
+      "3测试过",
+      "实跑列出4run"
+    ],
+    "skeptic_ssa": {
+      "verdict": "SOUND",
+      "structural_vs_patch": "structural:新增正交子命令,复用 _load_run 模式与既有命令同构,不改契约",
+      "constraints_checked": [
+        "不破坏 run-get required",
+        "空目录健壮"
+      ],
+      "api_hallucination_check": "verified: os.listdir/os.path.isdir/json.load/add_parser 均真实, ARTIFACTS_ROOT 已有"
+    }
+  }
+}

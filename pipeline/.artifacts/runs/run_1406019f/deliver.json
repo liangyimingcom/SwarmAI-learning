@@ -1,0 +1,48 @@
+{
+  "stage": "deliver",
+  "published_at": "2026-07-11T13:02:57.954014+00:00",
+  "data": {
+    "push_ready": true,
+    "layers": {
+      "L1_tests": true,
+      "L2_types": true,
+      "L3_no_regression": true,
+      "L4_adversarial": true,
+      "L5_ddd": true,
+      "L6_decisions": true
+    },
+    "adversarial_review": {
+      "profile_tier": "full",
+      "subagent": "513f91bc (fresh, diff-only)",
+      "verdict_initial": "ISSUES",
+      "findings": [
+        {
+          "severity": "HIGH",
+          "repro": "坏/半写 run.json 使整个 run-list 崩(非原子写并发命中)",
+          "status": "resolved",
+          "fix": "逐条 try/except+跳过标记 malformed; test_adv_malformed_run_is_isolated 钉死"
+        },
+        {
+          "severity": "MED",
+          "repro": "run.json 解析为非dict(如[])导致 AttributeError",
+          "status": "resolved",
+          "fix": "isinstance(dict) 守卫+标记 malformed; 同测试覆盖"
+        },
+        {
+          "severity": "LOW",
+          "repro": "--status 无效值静默 count=0 与真无匹配不可分",
+          "status": "resolved",
+          "fix": "argparse choices=[...]; test_adv_status_choices_enforced 断言 exit2"
+        },
+        {
+          "severity": "LOW",
+          "repro": "project 字段产出但测试未断言(可被误映射)",
+          "status": "resolved",
+          "fix": "test_ac2 增 project 断言"
+        }
+      ],
+      "converged_iterations": 1
+    },
+    "completion_audit": "3 AC + 4 对抗findings 全映射实现+测试; 5/5测试; 过滤突变可杀; 坏json隔离验证"
+  }
+}

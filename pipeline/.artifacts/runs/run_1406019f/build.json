@@ -1,0 +1,37 @@
+{
+  "stage": "build",
+  "published_at": "2026-07-11T13:00:04.000444+00:00",
+  "data": {
+    "branch": "pipeline/run-list",
+    "files_changed": [
+      "pipeline/pipeline_cli.py",
+      "pipeline/test_run_list.py"
+    ],
+    "tdd": {
+      "red": "run-list不存在先失败",
+      "green": "3测试过",
+      "verify": "实跑列出4run"
+    },
+    "ac_coverage": [
+      {
+        "ac": "AC1空库",
+        "impl": "cmd_run_list",
+        "test": "test_ac1_empty",
+        "verified": true
+      },
+      {
+        "ac": "AC2列出+字段",
+        "impl": "cmd_run_list",
+        "test": "test_ac2_lists_created",
+        "verified": true
+      },
+      {
+        "ac": "AC3过滤两侧",
+        "impl": "cmd_run_list",
+        "test": "test_ac3_status_filter",
+        "verified": true
+      }
+    ],
+    "intel_injection_considered": "RP-mc1(无界字符串)/RP-mc2(阈值分级):均N/A,本命令无字符串生成/无阈值; 但AC3已双侧钉死过滤(借鉴RP-mc2纪律)"
+  }
+}

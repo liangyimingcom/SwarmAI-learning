@@ -1,0 +1,54 @@
+{
+  "stage": "evaluate",
+  "published_at": "2026-07-11T13:00:03.771624+00:00",
+  "data": {
+    "recommendation": "GO",
+    "scope": "trivial-ish standard",
+    "acceptance_criteria": [
+      "空库 run-list 返回 count=0",
+      "已建 run 被列出且字段(id/profile/status/current_stage)正确",
+      "--status 过滤两侧钉死(命中1/不命中0)"
+    ],
+    "pre_mortem": [
+      "runs 目录不存在时崩溃",
+      "坏 run.json 使整命令挂",
+      "--status 拼错静默返回全部"
+    ],
+    "understanding": {
+      "work_type": "existing-feature",
+      "claim": "pipeline_cli.py 无 run-list 子命令, run-get 的 --run-id required 无法列全部",
+      "evidence": "code-trace: grep add_parser 清单10项无run-list; cmd_run_get 仅 _load_run(单id)",
+      "evidence_kind": "code-trace",
+      "skeptic_verdict": "SUPPORTED",
+      "alternative_considered": "扩展 run-get 支持无id—落选:语义混淆且破坏现契约"
+    },
+    "working_backwards": {
+      "target_customer": "用 pipeline CLI 的开发者",
+      "current_workaround": "手动 ls .artifacts/runs 再逐个 cat run.json",
+      "why_better": "一条命令表格化总览+状态过滤",
+      "must_be_true": "读取健壮(空目录/坏json不崩)"
+    },
+    "ambiguity_scan": {
+      "scanned_fields": [
+        "who",
+        "what",
+        "why",
+        "when",
+        "acceptance_criteria"
+      ],
+      "terms_checked": [
+        "列出",
+        "总览"
+      ],
+      "hits": [
+        {
+          "term": "run-list字段",
+          "where": "what",
+          "resolution": "self-answer: 定为 id/project/profile/status/current_stage/completed数",
+          "kind": "self-answer"
+        }
+      ],
+      "all_resolved": true
+    }
+  }
+}
