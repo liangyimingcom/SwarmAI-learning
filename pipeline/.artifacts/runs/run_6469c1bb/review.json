@@ -1,0 +1,13 @@
+{
+  "stage": "review",
+  "published_at": "2026-07-11T11:15:33.744824+00:00",
+  "data": {
+    "litmus_gate": "PASS：非脚手架、无 AC 缺口、无内部矛盾、有错误处理(空输入)",
+    "spec_compliance": {
+      "verdict": "PASS",
+      "ac_mapping": "3 AC 全部映射到实现+测试，无 MISSING/EXTRA"
+    },
+    "quality_findings": [],
+    "security_findings": []
+  }
+}

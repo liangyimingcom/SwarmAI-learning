@@ -1,0 +1,23 @@
+{
+  "stage": "reflect",
+  "published_at": "2026-07-11T12:26:03.295530+00:00",
+  "data": {
+    "lessons": [
+      {
+        "what_worked": "Gate2 fresh子agent抓到 HIGH阈值下侧off-by-one + unresolved参数bool守卫不对称，均1轮收敛",
+        "class": "pattern"
+      },
+      {
+        "what_failed": "首版含2处test-theater: test_ac4声称测clamp实为死代码, HIGH阈值只钉上侧——阈值须双侧钉死且mutation-proof",
+        "class": "pitfall",
+        "reusable": true,
+        "category": "knowledge",
+        "scope": "workspace",
+        "rule": "分级/阈值判定的测试必须双侧钉死边界(N与N-1)并做mutation验证(revert比较符即变红)，否则off-by-one突变存活;防御性clamp若不可达勿命名为测clamp"
+      }
+    ],
+    "rp_new": [
+      "RP-mc2: 阈值/分级判定测试须双侧边界钉死+mutation-proof, 防御性不可达代码勿伪称覆盖"
+    ]
+  }
+}

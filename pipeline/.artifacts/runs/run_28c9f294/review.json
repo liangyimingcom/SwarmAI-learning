@@ -1,0 +1,16 @@
+{
+  "stage": "review",
+  "published_at": "2026-07-11T12:21:56.694657+00:00",
+  "data": {
+    "litmus_gate": "PASS",
+    "spec_compliance": {
+      "verdict": "PASS",
+      "ac_mapping": "4AC全映射实现+测试"
+    },
+    "quality_findings": [],
+    "security_findings": [],
+    "rp_checked": [
+      "RP47:pass-突变将测试;RP-mc1:N/A"
+    ]
+  }
+}

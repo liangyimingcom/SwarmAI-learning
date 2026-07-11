@@ -1,0 +1,55 @@
+{
+  "stage": "evaluate",
+  "published_at": "2026-07-11T12:21:56.418203+00:00",
+  "data": {
+    "recommendation": "GO",
+    "scope": "standard",
+    "acceptance_criteria": [
+      "满绿run评满分12且HIGH",
+      "未闭HIGH/MED作废adversarial_clean加分",
+      "tier阈值10/6边界精确",
+      "score钳在[1,12]"
+    ],
+    "pre_mortem": [
+      "tier阈值写成>= off-by-one",
+      "bool静默错算",
+      "score越界"
+    ],
+    "understanding": {
+      "work_type": "greenfield",
+      "claim": "pipeline/ 下不存在 confidence_score.py，无把门控通过折算成1-12交付信心分的实现",
+      "evidence": "code-trace: glob pipeline/*.py 仅5脚本无 confidence_score；wtf_gate是反向风险分、pipeline_cli仅push_ready布尔",
+      "evidence_kind": "code-trace",
+      "skeptic_verdict": "SUPPORTED",
+      "alternative_considered": "复用wtf_gate/push_ready—落选:语义相反且无标量"
+    },
+    "working_backwards": {
+      "target_customer": "pipeline DELIVER 阶段",
+      "current_workaround": "只有push_ready二元判定",
+      "why_better": "1-12标量+分项拆解可解释交付信心",
+      "must_be_true": "评分确定性可测"
+    },
+    "ambiguity_scan": {
+      "scanned_fields": [
+        "who",
+        "what",
+        "why",
+        "when",
+        "acceptance_criteria"
+      ],
+      "terms_checked": [
+        "1-12",
+        "信心分"
+      ],
+      "hits": [
+        {
+          "term": "交付信心分",
+          "where": "what",
+          "resolution": "self-answer: 定为门控通过数+对抗clean+6层 折算1-12越高越好",
+          "kind": "self-answer"
+        }
+      ],
+      "all_resolved": true
+    }
+  }
+}

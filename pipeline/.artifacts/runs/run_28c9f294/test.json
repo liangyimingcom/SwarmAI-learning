@@ -1,0 +1,14 @@
+{
+  "stage": "test",
+  "published_at": "2026-07-11T12:21:56.762024+00:00",
+  "data": {
+    "passed": true,
+    "layers": {
+      "ac_driven": "6/6 test_过",
+      "dependency_scoped": "无其他模块import(0回归)",
+      "import_smoke": "import confidence_score OK"
+    },
+    "regressions": 0,
+    "wtf_score": 2
+  }
+}

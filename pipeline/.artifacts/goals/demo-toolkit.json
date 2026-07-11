@@ -1,0 +1,27 @@
+{
+  "goal_id": "demo-toolkit",
+  "cycle": 2,
+  "met": [
+    "dod1_doctest",
+    "dod2_all_export",
+    "dod3_textkit"
+  ],
+  "history": [
+    {
+      "cycle": 1,
+      "at": "2026-07-11T11:46:36.612440+00:00",
+      "note": "add __all__ to slugify.py (dod2)",
+      "newly_met": 2,
+      "met_total": 2
+    },
+    {
+      "cycle": 2,
+      "at": "2026-07-11T11:46:57.375370+00:00",
+      "note": "add textkit.truncate + tests (dod3)",
+      "newly_met": 1,
+      "met_total": 3
+    }
+  ],
+  "created_at": "2026-07-11T11:46:24.118508+00:00",
+  "status": "dod_met"
+}

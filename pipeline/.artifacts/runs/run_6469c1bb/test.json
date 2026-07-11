@@ -1,0 +1,14 @@
+{
+  "stage": "test",
+  "published_at": "2026-07-11T11:15:33.812279+00:00",
+  "data": {
+    "passed": true,
+    "layers": {
+      "ac_driven": "4/4 test_ 函数通过",
+      "dependency_scoped": "无其他模块 import slugify（0 依赖回归）",
+      "import_smoke": "import slugify OK，slugify(\"Hello, World!\")==hello-world"
+    },
+    "regressions": 0,
+    "wtf_score": 2
+  }
+}

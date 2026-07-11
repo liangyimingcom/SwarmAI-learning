@@ -1,0 +1,57 @@
+{
+  "stage": "evaluate",
+  "published_at": "2026-07-11T11:14:33.047447+00:00",
+  "data": {
+    "recommendation": "GO",
+    "scope": "standard",
+    "acceptance_criteria": [
+      "slug 全小写，空白与连续分隔符折叠为单个连字符",
+      "去除首尾连字符，仅保留 [a-z0-9-]",
+      "空串或全符号输入返回空串（不抛异常）"
+    ],
+    "pre_mortem": [
+      "unicode/CJK 字符处理不当",
+      "连续分隔符产生 -- ",
+      "空输入抛异常"
+    ],
+    "understanding": {
+      "work_type": "greenfield",
+      "claim": "当前 pipeline/ 项目下不存在任何 slug 生成函数（demo 目录为空）",
+      "evidence": "code-trace: ls demo/ 无文件；grep -r slugify pipeline/ 无命中",
+      "evidence_kind": "code-trace",
+      "skeptic_verdict": "SUPPORTED",
+      "alternative_considered": "复用第三方 python-slugify —— 落选：MVP 要零依赖且要演示 TDD"
+    },
+    "working_backwards": {
+      "target_customer": "复刻本 pipeline 的开发者，需要一个真实小任务验证闭环",
+      "current_workaround": "手写正则临时拼",
+      "why_better": "一个可测的纯函数，覆盖 CJK/空输入边界，作为 pipeline 首个跑通样例",
+      "must_be_true": "函数纯粹、无副作用、pytest 可断言"
+    },
+    "ambiguity_scan": {
+      "scanned_fields": [
+        "who",
+        "what",
+        "why",
+        "when",
+        "acceptance_criteria"
+      ],
+      "terms_checked": [
+        "standard",
+        "typical",
+        "可能",
+        "标准"
+      ],
+      "hits": [
+        {
+          "term": "URL slug",
+          "where": "what",
+          "resolution": "self-answer: 采用 GitHub/Jekyll 惯例——小写+连字符+仅 [a-z0-9-]",
+          "kind": "self-answer"
+        }
+      ],
+      "hit_count": 1,
+      "all_resolved": true
+    }
+  }
+}

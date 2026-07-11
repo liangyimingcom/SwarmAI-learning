@@ -1,0 +1,48 @@
+{
+  "stage": "deliver",
+  "published_at": "2026-07-11T12:26:03.221061+00:00",
+  "data": {
+    "push_ready": true,
+    "layers": {
+      "L1_tests": true,
+      "L2_types": true,
+      "L3_no_regression": true,
+      "L4_adversarial": true,
+      "L5_ddd": true,
+      "L6_decisions": true
+    },
+    "adversarial_review": {
+      "profile_tier": "full",
+      "subagent": "ff5cca63 (fresh, diff-only)",
+      "verdict_initial": "ISSUES",
+      "findings": [
+        {
+          "severity": "MED",
+          "repro": "score9 HIGH下侧未钉死, >=10->>=9 突变存活",
+          "status": "resolved",
+          "fix": "AC3补 confidence_score(6,False,6,0) tier==MED; 突变已可杀"
+        },
+        {
+          "severity": "MED",
+          "repro": "unresolved_high_med bool 未守卫(守卫不对称)",
+          "status": "resolved",
+          "fix": "bool检查纳入三参数并前置; 已验证抛TypeError"
+        },
+        {
+          "severity": "LOW",
+          "repro": "clamp死代码, test_ac4是theater",
+          "status": "resolved",
+          "fix": "注明防御性+改名 test_ac4_caps_and_floor 诚实测cap/floor"
+        },
+        {
+          "severity": "LOW",
+          "repro": "docstring声称profile_tier无此参数(契约漂移)",
+          "status": "resolved",
+          "fix": "docstring改为 caller guarantees profile_tier"
+        }
+      ],
+      "converged_iterations": 1
+    },
+    "completion_audit": "4 AC + 4 对抗findings 全映射实现+测试; 6/6测试+4doctest; M1突变可杀"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "stage": "think",
+  "published_at": "2026-07-11T12:21:56.489447+00:00",
+  "data": {
+    "alternatives": [
+      {
+        "name": "确定性加权纯函数",
+        "tradeoff": "SIMPLICITY:可测无副作用"
+      },
+      {
+        "name": "复用wtf风险分取反",
+        "tradeoff": "DELETION:落选语义不符"
+      }
+    ],
+    "risk_probe": [
+      {
+        "probe": "tier边界会否off-by-one",
+        "answer": "用exact 6/5、10/9断言锁死"
+      },
+      {
+        "probe": "bool会否错算",
+        "answer": "isinstance拦截"
+      },
+      {
+        "probe": "越界",
+        "answer": "min/max钳"
+      }
+    ],
+    "recommendation": "确定性加权纯函数"
+  }
+}

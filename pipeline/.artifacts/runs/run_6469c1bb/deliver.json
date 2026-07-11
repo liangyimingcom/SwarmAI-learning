@@ -1,0 +1,42 @@
+{
+  "stage": "deliver",
+  "published_at": "2026-07-11T11:18:42.312913+00:00",
+  "data": {
+    "push_ready": true,
+    "layers": {
+      "L1_tests": true,
+      "L2_types": true,
+      "L3_no_regression": true,
+      "L4_adversarial": true,
+      "L5_ddd": true,
+      "L6_decisions": true
+    },
+    "adversarial_review": {
+      "profile_tier": "full",
+      "subagent": "13cc54c3 (fresh context, diff-only)",
+      "verdict_initial": "ISSUES",
+      "findings": [
+        {
+          "severity": "MED",
+          "repro": "slugify(\"x!\"*100000) -> ~100k slug, no cap",
+          "status": "resolved",
+          "fix": "max_len=200 + re-strip; test_adv_med_length_cap"
+        },
+        {
+          "severity": "LOW",
+          "repro": "slugify(None) -> \"\" silently",
+          "status": "resolved",
+          "fix": "raise TypeError; test_adv_low_none_raises"
+        },
+        {
+          "severity": "LOW",
+          "repro": "slugify(\"Straße\") -> \"strae\"",
+          "status": "resolved",
+          "fix": "_PREFOLD map ß->ss etc; test_adv_low_prefold"
+        }
+      ],
+      "converged_iterations": 1
+    },
+    "completion_audit": "3 AC + 3 adversarial findings 全部映射到实现+测试，7/7 通过，doctest 5/5"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "stage": "plan",
+  "published_at": "2026-07-11T11:15:33.594569+00:00",
+  "data": {
+    "approach": "单文件纯函数 demo/slugify.py + demo/test_slugify.py，NFKD->ascii->lower->折叠->去边",
+    "file_discovery": [
+      {
+        "path": "demo/slugify.py",
+        "action": "CREATE"
+      },
+      {
+        "path": "demo/test_slugify.py",
+        "action": "TEST"
+      }
+    ],
+    "change_spec": [
+      {
+        "id": "c1",
+        "desc": "实现 slugify",
+        "depends_on": [],
+        "verify": "python3 -m doctest slugify.py"
+      },
+      {
+        "id": "c2",
+        "desc": "AC1-3 + premortem 测试",
+        "depends_on": [
+          "c1"
+        ],
+        "verify": "run test_ fns"
+      }
+    ],
+    "success_criteria": [
+      "4 组测试全过",
+      "doctest 4 过",
+      "import 无崩溃"
+    ],
+    "skeptic_ssa": {
+      "verdict": "SOUND",
+      "structural_vs_patch": "structural：新建纯函数，非在既有代码上打补丁；无爆炸半径（0 callers）",
+      "constraints_checked": [
+        "零依赖",
+        "纯函数无副作用"
+      ],
+      "api_hallucination_check": "unicodedata.normalize/encode 均为 stdlib 真实 API，已核对"
+    }
+  }
+}

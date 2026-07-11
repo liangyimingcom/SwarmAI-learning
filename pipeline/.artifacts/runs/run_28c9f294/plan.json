@@ -1,0 +1,49 @@
+{
+  "stage": "plan",
+  "published_at": "2026-07-11T12:21:56.557775+00:00",
+  "data": {
+    "approach": "单文件纯函数confidence_score+CLI，加权公式，tier阈值",
+    "file_discovery": [
+      {
+        "path": "pipeline/confidence_score.py",
+        "action": "CREATE"
+      },
+      {
+        "path": "pipeline/test_confidence_score.py",
+        "action": "TEST"
+      }
+    ],
+    "change_spec": [
+      {
+        "id": "c1",
+        "desc": "实现confidence_score",
+        "depends_on": [],
+        "ac": "AC1-4",
+        "verify": "doctest"
+      },
+      {
+        "id": "c2",
+        "desc": "AC+边界+CLI测试",
+        "depends_on": [
+          "c1"
+        ],
+        "ac": "AC1-4",
+        "verify": "run tests"
+      }
+    ],
+    "success_criteria": [
+      "6测试全过",
+      "doctest4过"
+    ],
+    "skeptic_ssa": {
+      "verdict": "SOUND",
+      "structural_vs_patch": "structural:独立可复用纯函数+CLI，与wtf_gate/pipeline门控同构",
+      "constraints_checked": [
+        "确定性",
+        "1-12钳",
+        "tier阈值精确"
+      ],
+      "api_hallucination_check": "verified: argparse/json/SystemExit/min/max/isinstance 均stdlib真实API"
+    }
+  }
+}

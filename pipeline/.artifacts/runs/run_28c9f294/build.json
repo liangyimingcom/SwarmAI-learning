@@ -1,0 +1,43 @@
+{
+  "stage": "build",
+  "published_at": "2026-07-11T12:21:56.626256+00:00",
+  "data": {
+    "branch": "pipeline/confidence-score",
+    "files_changed": [
+      "pipeline/confidence_score.py",
+      "pipeline/test_confidence_score.py"
+    ],
+    "tdd": {
+      "red": "函数不存在先失败",
+      "green": "6测试过",
+      "verify": "doctest4"
+    },
+    "ac_coverage": [
+      {
+        "ac": "AC1满分",
+        "impl": "confidence_score",
+        "test": "test_ac1_full_green_max",
+        "verified": true
+      },
+      {
+        "ac": "AC2作废clean",
+        "impl": "confidence_score",
+        "test": "test_ac2_unresolved_voids_clean",
+        "verified": true
+      },
+      {
+        "ac": "AC3阈值",
+        "impl": "confidence_score",
+        "test": "test_ac3_tier_boundaries",
+        "verified": true
+      },
+      {
+        "ac": "AC4钳",
+        "impl": "confidence_score",
+        "test": "test_ac4_clamp",
+        "verified": true
+      }
+    ],
+    "intel_injection_considered": "RP-mc1无界字符串:N/A(输出为bounded int/dict)"
+  }
+}

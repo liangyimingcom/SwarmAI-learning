@@ -1,0 +1,31 @@
+{
+  "stage": "think",
+  "published_at": "2026-07-11T11:15:33.524602+00:00",
+  "data": {
+    "alternatives": [
+      {
+        "name": "零依赖 stdlib(re+unicodedata)",
+        "tradeoff": "SIMPLICITY/DELETION：无外部依赖，NFKD 折叠 ASCII"
+      },
+      {
+        "name": "第三方 python-slugify",
+        "tradeoff": "FLEXIBILITY：功能多但引入依赖，违背 MVP 零依赖"
+      }
+    ],
+    "risk_probe": [
+      {
+        "probe": "NFKD 能否把 é 折成 e？",
+        "answer": "能，encode ascii ignore 后得 cafe"
+      },
+      {
+        "probe": "CJK 会被如何处理？",
+        "answer": "ascii ignore 丢弃，仅留 ASCII 部分"
+      },
+      {
+        "probe": "连续分隔符会否产生 --？",
+        "answer": "[^a-z0-9]+ 贪婪折叠为单个 -"
+      }
+    ],
+    "recommendation": "采用零依赖 stdlib 方案"
+  }
+}

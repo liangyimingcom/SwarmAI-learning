@@ -1,0 +1,72 @@
+{
+  "run_id": "run_28c9f294",
+  "project": "autonomous-pipeline",
+  "requirement": "实现 pipeline/confidence_score.py：由 run 的门控通过数计算 1-12 交付信心分+分项拆解",
+  "profile": "full",
+  "sequence": [
+    "evaluate",
+    "think",
+    "plan",
+    "build",
+    "review",
+    "test",
+    "deliver",
+    "reflect"
+  ],
+  "status": "completed",
+  "current_stage": null,
+  "stages_completed": [
+    "evaluate",
+    "think",
+    "plan",
+    "build",
+    "review",
+    "test",
+    "deliver",
+    "reflect"
+  ],
+  "created_at": "2026-07-11T12:18:41.646660+00:00",
+  "completed_at": "2026-07-11T12:26:03.331252+00:00",
+  "gates": {
+    "evaluate": {
+      "passed": true,
+      "at": "2026-07-11T12:21:56.418584+00:00"
+    },
+    "think": {
+      "passed": true,
+      "at": "2026-07-11T12:21:56.489657+00:00"
+    },
+    "plan": {
+      "passed": true,
+      "at": "2026-07-11T12:21:56.557998+00:00"
+    },
+    "build": {
+      "passed": true,
+      "at": "2026-07-11T12:21:56.626523+00:00"
+    },
+    "review": {
+      "passed": true,
+      "at": "2026-07-11T12:21:56.694859+00:00"
+    },
+    "test": {
+      "passed": true,
+      "at": "2026-07-11T12:21:56.762215+00:00"
+    },
+    "deliver": {
+      "passed": true,
+      "at": "2026-07-11T12:26:03.221559+00:00"
+    },
+    "reflect": {
+      "passed": true,
+      "at": "2026-07-11T12:26:03.295761+00:00"
+    }
+  },
+  "decision_log": [],
+  "intel_at_start": {
+    "runs_total": 1,
+    "build_injection_recommendations": [
+      "RP-mc1: 字符串生成函数缺长度上限"
+    ],
+    "high_risk_shapes": []
+  }
+}

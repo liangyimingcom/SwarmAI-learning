@@ -1,0 +1,19 @@
+{
+  "id": "demo-toolkit",
+  "goal": "把 demo/ 工具库补齐到可发布状态（迭代到 DoD）",
+  "max_cycles": 6,
+  "stuck_window": 3,
+  "cycle_scope": "one module or one criterion per cycle",
+  "review_cadence": 3,
+  "dod_criteria": [
+    {"id": "dod1_doctest", "type": "command", "desc": "所有 demo/*.py doctest 全过",
+     "cwd": "/Users/yiming/Downloads/all_the_meshclaw/SwarmAI-learning",
+     "check": "for f in demo/*.py; do python3 -m doctest \"$f\" || exit 1; done"},
+    {"id": "dod2_all_export", "type": "command", "desc": "每个非测试 demo 模块定义 __all__",
+     "cwd": "/Users/yiming/Downloads/all_the_meshclaw/SwarmAI-learning",
+     "check": "python3 -c \"import glob,sys; bad=[f for f in glob.glob('demo/*.py') if 'test_' not in f and '__all__' not in open(f).read()]; sys.exit(1 if bad else 0)\""},
+    {"id": "dod3_textkit", "type": "command", "desc": "新增 demo/textkit.py 的 truncate() 且测试全过",
+     "cwd": "/Users/yiming/Downloads/all_the_meshclaw/SwarmAI-learning/demo",
+     "check": "test -f textkit.py && python3 -c \"import test_textkit as t; [getattr(t,n)() for n in dir(t) if n.startswith('test_')]\""}
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "stage": "reflect",
+  "published_at": "2026-07-11T11:18:42.398648+00:00",
+  "data": {
+    "lessons": [
+      {
+        "what_worked": "Gate 2 fresh-context 子 agent 抓到 3 个 builder 盲点(长度上限/None/ß折叠)，全部收敛",
+        "class": "pattern"
+      },
+      {
+        "what_failed": "首版 slugify 无长度上限——归为可复用 RP：纯函数产出无界字符串须设 cap",
+        "class": "pitfall"
+      }
+    ],
+    "ddd_writeback": [
+      "拟写入 lessons: URL/文件名相关字符串生成默认设 max_len",
+      "子 agent 只喂 diff 的对抗审查值得作为 Gate 2 标准动作"
+    ],
+    "rp_new": [
+      "RP-mc1: 字符串生成函数缺长度上限"
+    ]
+  }
+}

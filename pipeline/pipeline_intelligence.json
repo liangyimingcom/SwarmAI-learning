@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "updated_at": "2026-07-11T12:26:03.368792+00:00",
+  "runs_total": 2,
+  "dimensions": {
+    "estimation_accuracy": {
+      "by_profile": {
+        "full": {
+          "runs": 2,
+          "blocked_gates": 0
+        }
+      }
+    },
+    "abandon_patterns": {
+      "high_risk_shapes": []
+    },
+    "adversarial_value": {
+      "findings_total": 7,
+      "resolved_total": 7
+    },
+    "build_injection_recommendations": [
+      "RP-mc1: 字符串生成函数缺长度上限",
+      "RP-mc2: 阈值/分级判定测试须双侧边界钉死+mutation-proof, 防御性不可达代码勿伪称覆盖"
+    ]
+  }
+}

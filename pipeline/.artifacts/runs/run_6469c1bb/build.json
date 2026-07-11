@@ -1,0 +1,36 @@
+{
+  "stage": "build",
+  "published_at": "2026-07-11T11:15:33.663157+00:00",
+  "data": {
+    "branch": "pipeline/slugify-demo",
+    "files_changed": [
+      "demo/slugify.py",
+      "demo/test_slugify.py"
+    ],
+    "tdd": {
+      "red": "测试先失败(函数不存在)",
+      "green": "实现后 4/4 过",
+      "verify": "doctest 4/4"
+    },
+    "ac_coverage": [
+      {
+        "ac": "AC1 小写+折叠",
+        "impl": "slugify",
+        "test": "test_ac1_lowercase_and_collapse",
+        "verified": true
+      },
+      {
+        "ac": "AC2 去边+字符集",
+        "impl": "slugify",
+        "test": "test_ac2_edges_and_charset",
+        "verified": true
+      },
+      {
+        "ac": "AC3 空/纯符号",
+        "impl": "slugify",
+        "test": "test_ac3_empty_and_symbols",
+        "verified": true
+      }
+    ]
+  }
+}
