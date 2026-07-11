@@ -61,7 +61,7 @@ STAGE_SEQUENCE = {
 SOLUTION_LANGUAGE = re.compile(
     r"\b(i will|we will|i'll|we'll|the fix is|should add|add a |add an |"
     r"refactor|implement|introduce|rewrite|i plan to|let's|going to|the solution)\b"
-    r"|我会|我将|修复方案|应该加|应该改|重构|实现一个|改成|新增|计划",
+    r"|我会|我将|我要|我打算|我准备|打算|准备加|修复方案|应该加|应该改|重构|实现一个|改成|新增|计划",
     re.IGNORECASE,
 )
 
