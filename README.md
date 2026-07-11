@@ -139,6 +139,7 @@ paused `goal-loop-*` cron (resume + point at a real goal).
 | [`docs/memory-task-mapping.md`](docs/memory-task-mapping.md) · [`docs/platform-base-mapping.md`](docs/platform-base-mapping.md) | Engines #2/#10 and the 6 platform-base engines (#1/#7/#8/#9/#11/#12) mapped to MeshClaw natives — all 13 engines accounted for. |
 | [`docs/eval-on-surf-forecast.md`](docs/eval-on-surf-forecast.md) · [`docs/ddd-on-surf-forecast.md`](docs/ddd-on-surf-forecast.md) | Applying Eval OS / DDD to the MeshClaw **surf-forecast** project (red-lines → regression gate / typed ontology). |
 | [`.kiro/skills/autonomous-pipeline/INSTRUCTIONS.md`](.kiro/skills/autonomous-pipeline/INSTRUCTIONS.md) | The orchestrator runbook: exact command sequence + gate/sub-agent/CodeLens/goal wiring. |
+| [`docs/LEARNINGS.md`](docs/LEARNINGS.md) | **Capstone reflection** — what porting all 13 engines actually taught (gates > carefulness, 测不到=没造, compounding emerges, 会遗忘>只记住, build-vs-map). |
 
 ## Status & known gaps
 
