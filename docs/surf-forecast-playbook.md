@@ -50,7 +50,8 @@ cp -r /Users/yiming/Downloads/all_the_meshclaw/SwarmAI-learning/.kiro/skills/aut
 mkdir -p "$SF/pipeline"; cp "$PIPE"/*.py "$SF/pipeline/"
 # (c) DDD 知识层已种(8条红线)：$SF/ddd/knowledge.jsonl  ✅
 # (d) CodeLens 事实源：package liangyimingcom/surf-forecast (已索引)
-source ~/.meshclaw/secrets/codelens.env    # CODELENS_TOKEN
+# ⚠️ 必须用 set -a 让 CODELENS_TOKEN 导出到子进程(python)，否则 code_intel.py 报 "CODELENS_TOKEN not set":
+set -a; source ~/.meshclaw/secrets/codelens.env; set +a    # secrets 文件里的 VAR= 没 export
 ```
 
 **环境变量（每次开发前 export）：**
@@ -73,6 +74,7 @@ $D inject --stage evaluate    # → 4 红线 constraint + wdeg model + DynamoDB 
 
 ### ②CodeLens 摸底 + 算爆炸半径（PLAN）
 ```bash
+set -a; source ~/.meshclaw/secrets/codelens.env; set +a   # 导出 CODELENS_TOKEN 到 python 子进程
 CI="python3 pipeline/code_intel.py"
 $CI symbol --package liangyimingcom/surf-forecast --query build_context
 $CI impact --package liangyimingcom/surf-forecast --symbol score_wind   # 上游31/下游4
