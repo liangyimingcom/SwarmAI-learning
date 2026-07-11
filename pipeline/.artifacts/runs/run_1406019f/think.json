@@ -1,0 +1,31 @@
+{
+  "stage": "think",
+  "published_at": "2026-07-11T13:00:03.851403+00:00",
+  "data": {
+    "alternatives": [
+      {
+        "name": "新增独立 run-list 子命令",
+        "tradeoff": "SIMPLICITY:不碰既有契约"
+      },
+      {
+        "name": "改 run-get 支持无id",
+        "tradeoff": "DELETION:落选,破坏 required 契约+语义混淆"
+      }
+    ],
+    "risk_probe": [
+      {
+        "probe": "runs 目录不存在?",
+        "answer": "os.path.isdir 守卫返回空"
+      },
+      {
+        "probe": "坏 run.json?",
+        "answer": "当前逐个 json.load—已知风险,AC 未强制容错,记为 pre_mortem"
+      },
+      {
+        "probe": "--status 无效值?",
+        "answer": "过滤后自然 count=0,非崩溃"
+      }
+    ],
+    "recommendation": "新增独立 run-list"
+  }
+}

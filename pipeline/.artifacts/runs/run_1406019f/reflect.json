@@ -1,0 +1,23 @@
+{
+  "stage": "reflect",
+  "published_at": "2026-07-11T13:02:58.036898+00:00",
+  "data": {
+    "lessons": [
+      {
+        "what_worked": "Gate2 fresh子agent把我REVIEW时轻描淡写的坏json known-gap升级为HIGH(一个坏文件拖垮整列表+非原子写并发真实可发生)，1轮收敛",
+        "class": "pattern"
+      },
+      {
+        "what_failed": "REVIEW阶段我把读取健壮性列为known-gap放行而非修—聚合读命令必须逐条容错",
+        "class": "pitfall",
+        "reusable": true,
+        "category": "knowledge",
+        "scope": "workspace",
+        "rule": "遍历聚合多文件的命令(list/汇总)必须逐条 try/except 隔离坏/半写/非dict文件, 一个坏文件不能拖垮整体; 尤其写入非原子时并发读会命中半写文件"
+      }
+    ],
+    "rp_new": [
+      "RP-mc3: 聚合读取命令须逐文件容错隔离(坏/半写/类型错), 非原子写场景并发读防半写崩溃"
+    ]
+  }
+}

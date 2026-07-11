@@ -1,0 +1,17 @@
+{
+  "stage": "review",
+  "published_at": "2026-07-11T13:00:04.116303+00:00",
+  "data": {
+    "litmus_gate": "PASS:真逻辑非脚手架/AC全覆盖/无矛盾/空目录有守卫",
+    "spec_compliance": {
+      "verdict": "PASS",
+      "ac_mapping": "3AC全映射实现+测试"
+    },
+    "quality_findings": [],
+    "security_findings": [],
+    "rp_checked": [
+      "RP-mc2:pass-AC3过滤双侧钉死",
+      "坏json容错:未做,记入pre_mortem/known-gap"
+    ]
+  }
+}

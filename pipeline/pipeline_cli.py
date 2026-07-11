@@ -383,6 +383,39 @@ def cmd_run_get(args) -> None:
     _ok(_load_run(args.run_id))
 
 
+def cmd_run_list(args) -> None:
+    """List all runs (id/project/profile/status/current_stage). Optional --status filter."""
+    runs_dir = os.path.join(ARTIFACTS_ROOT, "runs")
+    rows = []
+    if os.path.isdir(runs_dir):
+        for rid in sorted(os.listdir(runs_dir)):
+            p = os.path.join(runs_dir, rid, "run.json")
+            if not os.path.exists(p):
+                continue
+            # Gate 2 HIGH/MED: one corrupt/half-written/non-dict run.json must NOT
+            # take down the whole listing (_save_run is not atomic). Isolate per-run.
+            try:
+                with open(p) as f:
+                    r = json.load(f)
+            except (json.JSONDecodeError, OSError, ValueError):
+                rows.append({"run_id": rid, "malformed": True})
+                continue
+            if not isinstance(r, dict):
+                rows.append({"run_id": rid, "malformed": True})
+                continue
+            rows.append({
+                "run_id": r.get("run_id", rid),
+                "project": r.get("project"),
+                "profile": r.get("profile"),
+                "status": r.get("status"),
+                "current_stage": r.get("current_stage"),
+                "stages_completed": len(r.get("stages_completed", [])),
+            })
+    if args.status:
+        rows = [r for r in rows if r.get("status") == args.status]
+    _ok({"count": len(rows), "runs": rows})
+
+
 def cmd_log(args) -> None:
     run = _load_run(args.run_id)
     run["decision_log"].append({
@@ -643,6 +676,11 @@ def main() -> None:
     p = sub.add_parser("run-get")
     p.add_argument("--run-id", required=True)
     p.set_defaults(func=cmd_run_get)
+
+    p = sub.add_parser("run-list")
+    p.add_argument("--status", choices=["in_progress", "completed", "blocked", "reject", "defer"],
+                   help="filter by status")
+    p.set_defaults(func=cmd_run_list)
 
     p = sub.add_parser("log")
     p.add_argument("--run-id", required=True)

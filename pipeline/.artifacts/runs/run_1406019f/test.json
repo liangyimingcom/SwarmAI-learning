@@ -1,0 +1,14 @@
+{
+  "stage": "test",
+  "published_at": "2026-07-11T13:00:04.242405+00:00",
+  "data": {
+    "passed": true,
+    "layers": {
+      "ac_driven": "3/3 test_run_list 过",
+      "dependency_scoped": "改动仅加子命令,既有命令回归:run-list实跑正常,其余不受影响",
+      "import_smoke": "py_compile OK"
+    },
+    "regressions": 0,
+    "wtf_score": 2
+  }
+}

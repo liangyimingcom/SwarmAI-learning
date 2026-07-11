@@ -15,3 +15,8 @@ inclusion: manual
 - ✅ Gate2 fresh子agent抓到 HIGH阈值下侧off-by-one + unresolved参数bool守卫不对称，均1轮收敛
 - ⚠️ 首版含2处test-theater: test_ac4声称测clamp实为死代码, HIGH阈值只钉上侧——阈值须双侧钉死且mutation-proof
 - 🚧 new gate proposed: RP-mc2: 阈值/分级判定测试须双侧边界钉死+mutation-proof, 防御性不可达代码勿伪称覆盖
+
+## run_1406019f · 给 pipeline_cli.py 增加 run-list 子命令，列出所有 run 的 id/profile/status/current_stage · 2026-07-11
+- ✅ Gate2 fresh子agent把我REVIEW时轻描淡写的坏json known-gap升级为HIGH(一个坏文件拖垮整列表+非原子写并发真实可发生)，1轮收敛
+- ⚠️ REVIEW阶段我把读取健壮性列为known-gap放行而非修—聚合读命令必须逐条容错
+- 🚧 new gate proposed: RP-mc3: 聚合读取命令须逐文件容错隔离(坏/半写/类型错), 非原子写场景并发读防半写崩溃

@@ -106,6 +106,14 @@ $PIPE run-report   --run-id $RUN      # -> .artifacts/runs/$RUN/REPORT.md
 Goal mode: `goal_runner.py init|check|cycle-done --goal goals/<g>.json`; overnight via the
 paused `goal-loop-*` cron (resume + point at a real goal).
 
+## Learning docs
+
+| Doc | What it teaches |
+|-----|-----------------|
+| [`docs/walkthrough-run-list.md`](docs/walkthrough-run-list.md) | Full replay of one real run (adding the `run-list` command) — every stage + all 3 gates, with mermaid flow + sequence diagrams. Includes a live Gate 2 catch (a builder blind spot escalated to HIGH). |
+| [`docs/pipeline-on-surf-forecast.md`](docs/pipeline-on-surf-forecast.md) | How to apply the pipeline to the MeshClaw **surf-forecast** project: red-lines→gates mapping, CodeLens blast-radius commands, principle analysis (记性 vs 结构). |
+| [`.kiro/skills/autonomous-pipeline/INSTRUCTIONS.md`](.kiro/skills/autonomous-pipeline/INSTRUCTIONS.md) | The orchestrator runbook: exact command sequence + gate/sub-agent/CodeLens/goal wiring. |
+
 ## Status & known gaps
 
 Core mechanisms are real, runnable, and verified end-to-end (see `.artifacts/runs/`).

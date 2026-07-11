@@ -1,0 +1,73 @@
+{
+  "run_id": "run_1406019f",
+  "project": "autonomous-pipeline",
+  "requirement": "给 pipeline_cli.py 增加 run-list 子命令，列出所有 run 的 id/profile/status/current_stage",
+  "profile": "full",
+  "sequence": [
+    "evaluate",
+    "think",
+    "plan",
+    "build",
+    "review",
+    "test",
+    "deliver",
+    "reflect"
+  ],
+  "status": "completed",
+  "current_stage": null,
+  "stages_completed": [
+    "evaluate",
+    "think",
+    "plan",
+    "build",
+    "review",
+    "test",
+    "deliver",
+    "reflect"
+  ],
+  "created_at": "2026-07-11T12:57:45.929027+00:00",
+  "completed_at": "2026-07-11T13:02:58.077087+00:00",
+  "gates": {
+    "evaluate": {
+      "passed": true,
+      "at": "2026-07-11T13:00:03.771821+00:00"
+    },
+    "think": {
+      "passed": true,
+      "at": "2026-07-11T13:00:03.851635+00:00"
+    },
+    "plan": {
+      "passed": true,
+      "at": "2026-07-11T13:00:03.927814+00:00"
+    },
+    "build": {
+      "passed": true,
+      "at": "2026-07-11T13:00:04.000688+00:00"
+    },
+    "review": {
+      "passed": true,
+      "at": "2026-07-11T13:00:04.116495+00:00"
+    },
+    "test": {
+      "passed": true,
+      "at": "2026-07-11T13:00:04.242740+00:00"
+    },
+    "deliver": {
+      "passed": true,
+      "at": "2026-07-11T13:02:57.954334+00:00"
+    },
+    "reflect": {
+      "passed": true,
+      "at": "2026-07-11T13:02:58.037129+00:00"
+    }
+  },
+  "decision_log": [],
+  "intel_at_start": {
+    "runs_total": 2,
+    "build_injection_recommendations": [
+      "RP-mc1: 字符串生成函数缺长度上限",
+      "RP-mc2: 阈值/分级判定测试须双侧边界钉死+mutation-proof, 防御性不可达代码勿伪称覆盖"
+    ],
+    "high_risk_shapes": []
+  }
+}
