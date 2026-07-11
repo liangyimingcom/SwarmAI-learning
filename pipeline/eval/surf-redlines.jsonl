@@ -1,0 +1,6 @@
+{"id":"RL_decimal","critical":true,"expect":"PASS","source":"红线 float->Decimal","check":"grep -q '_to_decimal' src/web/db.py"}
+{"id":"RL_decimal_used","critical":true,"expect":"PASS","source":"红线 写库须调用_to_decimal","check":"grep -rlq '_to_decimal' src/web/refresh.py src/web/seed.py 2>/dev/null || grep -rlq '_to_decimal' src/web/"}
+{"id":"RL_no_open_sg","critical":true,"expect":"PASS","source":"红线 ALB SG入站禁0.0.0.0/0(仅前缀列表); RP50精确化:只查ingress规则块,排除egress/路由/注释","check":"! grep -rn -A6 'aws_vpc_security_group_ingress_rule' iac/terraform/modules/network/main.tf 2>/dev/null | grep -q '0.0.0.0/0'"}
+{"id":"RL_no_auto_approve","critical":true,"expect":"PASS","source":"红线 terraform 禁-auto-approve","check":"! grep -rn 'auto-approve' deploy.sh iac/ 2>/dev/null | grep -v '#'"}
+{"id":"RL_spots_auth","critical":true,"expect":"PASS","source":"红线 /api/spots 鉴权","check":"grep -rqiE 'auth|401|require|depend' src/web/spots.py src/web/auth.py"}
+{"id":"RL_gmt8","critical":false,"expect":"PASS","source":"红线 GMT+8 日界","check":"grep -rqiE 'gmt.?8|utc.?8|\\+08|Asia/Shanghai|timedelta.hours=8|tz' src/"}

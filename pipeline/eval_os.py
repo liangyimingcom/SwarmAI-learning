@@ -48,9 +48,9 @@ def _git_commit() -> str:
         return "nogit"
 
 
-def _load_golden() -> list:
+def _load_golden(path: str | None = None) -> list:
     cases = []
-    with open(GOLDEN) as f:
+    with open(path or GOLDEN) as f:
         for line in f:
             line = line.strip()
             if line:
@@ -58,8 +58,13 @@ def _load_golden() -> list:
     return cases
 
 
-def _verdict(case: dict) -> str:
-    """Run the case's data through the REAL gate validator for its stage."""
+def _verdict(case: dict, cwd: str | None = None) -> str:
+    """command-type case -> run shell (rc0=PASS); else run the REAL gate validator."""
+    if "check" in case:
+        import subprocess
+        r = subprocess.run(case["check"], shell=True, cwd=cwd or HERE,
+                           capture_output=True, text=True)
+        return "PASS" if r.returncode == 0 else "BLOCK"
     gate = STAGE_GATES.get(case["stage"])
     if gate is None:
         return "NO_GATE"
@@ -67,16 +72,17 @@ def _verdict(case: dict) -> str:
     return "PASS" if not errs else "BLOCK"
 
 
-def run_eval() -> dict:
-    cases = _load_golden()
+def run_eval(golden_path: str | None = None, cwd: str | None = None) -> dict:
+    cases = _load_golden(golden_path)
     results, cats = [], {}
     inversions = []
     for c in cases:
-        got = _verdict(c)
+        got = _verdict(c, cwd)
         ok = (got == c["expect"])
-        results.append({"id": c["id"], "category": c["category"], "expect": c["expect"],
+        cat = c.get("category", "redline")
+        results.append({"id": c["id"], "category": cat, "expect": c["expect"],
                         "got": got, "pass": ok, "critical": c.get("critical", False)})
-        d = cats.setdefault(c["category"], {"total": 0, "passed": 0})
+        d = cats.setdefault(cat, {"total": 0, "passed": 0})
         d["total"] += 1
         d["passed"] += 1 if ok else 0
         if not ok and c.get("critical"):
@@ -252,6 +258,8 @@ def main() -> None:
     ap.add_argument("--ingest-sim", metavar="FILE",
                     help="ingest simulation boundary-hold results; a breach exits 3 (release gate)")
     ap.add_argument("--trend", action="store_true", help="render OS Health Score trend from history")
+    ap.add_argument("--golden", help="external Golden Set jsonl (e.g. a project's redlines)")
+    ap.add_argument("--cwd", help="run command-type checks in this dir (e.g. the project root)")
     args = ap.parse_args()
 
     if args.emit_judge:
@@ -270,7 +278,7 @@ def main() -> None:
         _trend()
         return
 
-    r = run_eval()
+    r = run_eval(args.golden, args.cwd)
     report = {k: r[k] for k in ("at", "commit", "total", "passed", "score", "dimensions", "inversions")}
     print(json.dumps(report, indent=2, ensure_ascii=False))
 
