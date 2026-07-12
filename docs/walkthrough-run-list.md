@@ -138,4 +138,4 @@ $PIPE run-list                       # 本次做的功能: 一览所有 run
 $PIPE run-report --run-id <id>       # 生成 REPORT.md
 ```
 
-> 产物见 `pipeline/.artifacts/runs/run_1406019f/REPORT.md`（本次 run 的全阶段 artifact + 门控记录）。
+> ### 产物见 `pipeline/.artifacts/runs/run_1406019f/REPORT.md`（本次 run 的全阶段 artifact + 门控记录）。

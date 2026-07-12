@@ -1,5 +1,7 @@
 # SwarmAI → MeshClaw Port (13 engines)
 
+**English** · [中文](README.zh-CN.md)
+
 A learning port of [SwarmAI](https://github.com/xg-gh-25/SwarmAI)'s **self-evolving Agent OS**
 onto the **MeshClaw** agent runtime. Started as the **Autonomous Pipeline** (engine #4) and
 grew to cover all **13 engines**: 5 built & verified end-to-end, 7 mapped to MeshClaw natives,
