@@ -30,6 +30,14 @@
 由 Eval（#13）证明收敛、Pollinate（#5）把同一套 DDD 层用于内容。端到端验证（见
 `.artifacts/runs/`、PR #1–#4）。
 
+## 在新机器上一键导入
+
+```bash
+git clone https://github.com/liangyimingcom/SwarmAI-learning.git
+cd SwarmAI-learning && bash install/install.sh    # 装 skill + 自检 5 引擎
+```
+纯标准库（无需 pip）。上手见 [`install/QUICKSTART.md`](install/QUICKSTART.md)。
+
 ## 架构
 
 ```mermaid
