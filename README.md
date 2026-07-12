@@ -31,6 +31,14 @@ grew to cover all **13 engines**: 5 built & verified end-to-end, 7 mapped to Mes
 Evolution (#6) → gates → Memory, with Eval (#13) proving convergence and Pollinate (#5)
 applying the same DDD layer to content. Verified end-to-end (see `.artifacts/runs/`, PRs #1–#4).
 
+## Install on a new machine (one-click)
+
+```bash
+git clone https://github.com/liangyimingcom/SwarmAI-learning.git
+cd SwarmAI-learning && bash install/install.sh    # installs the skill + self-checks 5 engines
+```
+Pure stdlib (no pip). See [`install/QUICKSTART.md`](install/QUICKSTART.md) to start using it.
+
 ## Architecture
 
 ```mermaid
